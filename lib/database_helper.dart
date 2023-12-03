@@ -39,31 +39,31 @@ class DatabaseHelper {
           ''');
   }
 
-  // Future<void> insertTask(TaskInfo task) async {
-  //   // Get a reference to the database.
-  //   final db = await database;
-  //   // Insert the Task into the correct table.
-  //   await db.insert(
-  //     'tasks',
-  //     task.toMap(),
-  //     conflictAlgorithm: ConflictAlgorithm.replace,
-  //   );
-  // }
-  //
-  // Future<List<TaskInfo>> tasks() async {
-  //   // Get a reference to the database.
-  //   final db = await database;
-  //
-  //   // Query the table for all tasks.
-  //   final List<Map<String, dynamic>> maps = await db.query('tasks');
-  //
-  //   // Convert the List<Map<String, dynamic> into a List<TaskInfo>.
-  //   return List.generate(maps.length, (i) {
-  //     return TaskInfo(
-  //       taskId: maps[i]['taskId'],
-  //       taskName: maps[i]['taskName'],
-  //       taskFinished: maps[i]['taskFinished'] == 1,
-  //     );
-  //   });
-  // }
+  Future<void> insertTask(TaskInfo task) async {
+    // Get a reference to the database.
+    final db = await database;
+    // Insert the Task into the correct table.
+    await db.insert(
+      'notes_table',
+      task.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<TaskInfo>> tasks() async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Query the table for all tasks.
+    final List<Map<String, dynamic>> maps = await db.query('notes_table');
+
+    // Convert the List<Map<String, dynamic> into a List<TaskInfo>.
+    return List.generate(maps.length, (i) {
+      return TaskInfo(
+        taskId: maps[i]['id'],
+        taskName: maps[i]['name'],
+        taskFinished: maps[i]['finished'] == 1,
+      );
+    });
+  }
 }

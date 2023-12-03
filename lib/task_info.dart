@@ -11,9 +11,9 @@ class TaskInfo {
   // Convert a TaskInfo object into a map.
   Map<String, dynamic> toMap() {
     return {
-      'taskId': taskId,
-      'taskName': taskName,
-      'taskFinished': taskFinished ? 1 : 0,
+      'id': taskId,
+      'name': taskName,
+      'finished': taskFinished ? 1 : 0,
     };
   }
 }

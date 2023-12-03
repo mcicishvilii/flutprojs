@@ -9,17 +9,17 @@ class TaskList extends ChangeNotifier {
   final dbHelper = DatabaseHelper.instance;
   List<TaskInfo> get tasks => _tasks;
 
-  // void add(TaskInfo task) async {
-  //   _tasks.add(task);
-  //   await dbHelper.insertTask(task);
-  //   notifyListeners();
-  // }
-  //
-  // Future<void> loadTasks() async {
-  //   _tasks.clear();
-  //   final loadedTasks = await dbHelper.tasks();
-  //   _tasks.addAll(loadedTasks);
-  //   log('log: ${loadedTasks.length}');
-  //   notifyListeners();
-  // }
+  void add(TaskInfo task) async {
+    _tasks.add(task);
+    await dbHelper.insertTask(task);
+    notifyListeners();
+  }
+
+  Future<void> loadTasks() async {
+    _tasks.clear();
+    final loadedTasks = await dbHelper.tasks();
+    _tasks.addAll(loadedTasks);
+    log('cicikore: ${loadedTasks.length}');
+    notifyListeners();
+  }
 }

@@ -37,7 +37,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                       taskId: DateTime.now().millisecondsSinceEpoch,
                       taskName: taskName,
                       taskFinished: false);
-                  // Provider.of<TaskList>(context, listen: false).add(task);
+                  Provider.of<TaskList>(context, listen: false).add(task);
                   Navigator.pop(context);
                 }
               },
