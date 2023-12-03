@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TaskList()..loadTasks(),
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Notes App',
         home: NotesHomePage(title: 'my notes app'),
       ),
@@ -37,30 +38,39 @@ class NotesHomePage extends StatelessWidget {
             itemCount: taskList.tasks.length,
             itemBuilder: (context, index) {
               final task = taskList.tasks[index];
-              return ListTile(
-                title: Text(
-                  task.taskName,
-                  style: TextStyle(
-                    decoration:
-                        task.taskFinished ? TextDecoration.lineThrough : null,
-                  ),
+              return Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                trailing: Checkbox(
-                  value: task.taskFinished,
-                  onChanged: (newValue) async {
-                    task.taskFinished = newValue!;
-                    await taskList.finishTask(task);
+                child: ListTile(
+                  tileColor: task.taskFinished ? Colors.green[100] : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  contentPadding: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 8.0),
+                  title: Text(
+                    task.taskName,
+                    style: TextStyle(
+                      decoration: task.taskFinished ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                  trailing: Checkbox(
+                    value: task.taskFinished,
+                    onChanged: (newValue) async {
+                      task.taskFinished = newValue!;
+                      await taskList.finishTask(task);
+                    },
+                  ),
+                  onLongPress: () async {
+                    await taskList.removeTask(task);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Task removed'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
                   },
                 ),
-                onLongPress: () async {
-                  await taskList.removeTask(task);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Task removed'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  );
-                },
               );
             },
           );
