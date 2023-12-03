@@ -11,9 +11,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Notes App',
-      home: NotesHomePage(title: 'my notes app'),
+    return ChangeNotifierProvider(
+      create: (context) => TaskList()..loadTasks(),
+      child: const MaterialApp(
+        title: 'Notes App',
+        home: NotesHomePage(title: 'my notes app'),
+      ),
     );
   }
 }
@@ -49,10 +52,10 @@ class NotesHomePage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const NewTaskScreen()),
+            MaterialPageRoute(builder: (context) => NewTaskScreen()),
           );
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         backgroundColor: Colors.green,
       ),
     );
