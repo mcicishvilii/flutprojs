@@ -41,7 +41,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   Navigator.pop(context);
                 }
               },
-              child: Text('Add Task'),
+              child: const Text('Add Task'),
             ),
           ],
         ),

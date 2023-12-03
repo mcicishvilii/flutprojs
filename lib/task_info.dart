@@ -3,13 +3,16 @@ class TaskInfo {
   final String taskName;
   bool taskFinished;
 
-  TaskInfo({required this.taskId, required this.taskName, this.taskFinished = false});
+  TaskInfo(
+      {required this.taskId,
+      required this.taskName,
+      this.taskFinished = false});
+
   void updateTaskFinished(bool newValue) {
     taskFinished = newValue;
   }
 
-  // Convert a TaskInfo object into a map.
-  Map<String, dynamic> toMap() {
+    Map<String, dynamic> toMap() {
     return {
       'id': taskId,
       'name': taskName,

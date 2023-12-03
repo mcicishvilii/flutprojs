@@ -1,6 +1,6 @@
+import 'package:flutprojs/new_task_screen.dart';
 import 'package:flutprojs/task_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutprojs/new_task_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -9,6 +9,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
 
 class NotesHomePage extends StatelessWidget {
   const NotesHomePage({super.key, required String title});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,13 +38,29 @@ class NotesHomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               final task = taskList.tasks[index];
               return ListTile(
-                title: Text(task.taskName),
+                title: Text(
+                  task.taskName,
+                  style: TextStyle(
+                    decoration:
+                        task.taskFinished ? TextDecoration.lineThrough : null,
+                  ),
+                ),
                 trailing: Checkbox(
                   value: task.taskFinished,
-                  onChanged: (newValue) {
+                  onChanged: (newValue) async {
                     task.taskFinished = newValue!;
+                    await taskList.finishTask(task);
                   },
                 ),
+                onLongPress: () async {
+                  await taskList.removeTask(task);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Task removed'),
+                      duration: Duration(seconds: 1),
+                    ),
+                  );
+                },
               );
             },
           );
@@ -52,11 +70,10 @@ class NotesHomePage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NewTaskScreen()),
+            MaterialPageRoute(builder: (context) => const NewTaskScreen()),
           );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
       ),
     );
   }
