@@ -1,18 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutprojs/data/remote/yes_no_dto.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-Future<YesNoDto> fetchYesOrNo() async {
-  final response = await http.get(Uri.parse('https://yesno.wtf/api'));
-  if (response.statusCode == 200) {
-    return YesNoDto.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-  } else {
-    throw Exception('Failed to load data');
-  }
-}
+import 'package:flutprojs/data/remote/yes_no_service.dart';
 
 class NextScreen extends StatefulWidget {
   const NextScreen({super.key});
@@ -27,7 +15,7 @@ class _NextScreenState extends State<NextScreen> {
   @override
   void initState() {
     super.initState();
-    futureYesNo = fetchYesOrNo();
+    futureYesNo = YesNoService().fetchYesOrNo();
   }
 
   @override
