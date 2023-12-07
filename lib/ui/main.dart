@@ -1,6 +1,7 @@
 import 'package:flutprojs/ui/next_screen.dart';
 import 'package:flutprojs/ui/new_task_screen.dart';
 import 'package:flutprojs/data/db/task_list.dart';
+import 'package:flutprojs/ui/test_widgets_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -79,21 +80,39 @@ class NotesHomePage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NewTaskScreen()),
-              );
-            },
-            child: const Icon(Icons.add),
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Positioned(
+            right: 00.0,
+            bottom: 10.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NewTaskScreen()),
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
+          ),
+          Positioned(
+            left: 30.0,
+            bottom: 10.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TestWidgetsScreen(),
+                  ),
+                );
+              },
+              child: const Text("test"),
+            ),
           ),
         ],
       ),
-
       bottomNavigationBar: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
