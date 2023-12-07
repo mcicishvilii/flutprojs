@@ -104,7 +104,7 @@ class NotesHomePage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const NextScreen()),
             );
           },
-          child: const Text("Go To Fetch Screen"),
+          child: const Text("Go To api call"),
         ),
       ),
     );
