@@ -1,4 +1,4 @@
-import 'package:flutprojs/task_info.dart';
+import 'package:flutprojs/data/db/task_info.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 

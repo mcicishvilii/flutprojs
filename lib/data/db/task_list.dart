@@ -1,4 +1,4 @@
-import 'package:flutprojs/task_info.dart';
+import 'package:flutprojs/data/db/task_info.dart';
 import 'package:flutter/material.dart';
 
 import 'database_helper.dart';

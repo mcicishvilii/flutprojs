@@ -1,5 +1,6 @@
-import 'package:flutprojs/new_task_screen.dart';
-import 'package:flutprojs/task_list.dart';
+import 'package:flutprojs/ui/next_screen.dart';
+import 'package:flutprojs/ui/new_task_screen.dart';
+import 'package:flutprojs/data/db/task_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,11 +48,13 @@ class NotesHomePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  contentPadding: const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 8.0),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(24.0, 8.0, 8.0, 8.0),
                   title: Text(
                     task.taskName,
                     style: TextStyle(
-                      decoration: task.taskFinished ? TextDecoration.lineThrough : null,
+                      decoration:
+                          task.taskFinished ? TextDecoration.lineThrough : null,
                     ),
                   ),
                   trailing: Checkbox(
@@ -76,14 +79,33 @@ class NotesHomePage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const NewTaskScreen()),
-          );
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewTaskScreen()),
+              );
+            },
+            child: const Icon(Icons.add),
+          ),
+        ],
+      ),
+
+      bottomNavigationBar: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NextScreen()),
+            );
+          },
+          child: const Text("Go To Fetch Screen"),
+        ),
       ),
     );
   }

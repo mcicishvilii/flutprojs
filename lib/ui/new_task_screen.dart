@@ -1,5 +1,5 @@
-import 'package:flutprojs/task_info.dart';
-import 'package:flutprojs/task_list.dart';
+import 'package:flutprojs/data/db/task_info.dart';
+import 'package:flutprojs/data/db/task_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
