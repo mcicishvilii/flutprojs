@@ -1,3 +1,4 @@
+import 'package:flutprojs/data/remote/misho_dto.dart';
 import 'package:flutprojs/data/remote/yes_no_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutprojs/data/remote/yes_no_service.dart';
@@ -10,7 +11,7 @@ class NextScreen extends StatefulWidget {
 }
 
 class _NextScreenState extends State<NextScreen> {
-  late Future<YesNoDto> futureYesNo;
+  late Future<MishoDto> futureYesNo;
 
   @override
   void initState() {
@@ -31,14 +32,14 @@ class _NextScreenState extends State<NextScreen> {
           title: const Text('Fetch Data Example'),
         ),
         body: Center(
-          child: FutureBuilder<YesNoDto>(
+          child: FutureBuilder<MishoDto>(
             future: futureYesNo,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
                   children: <Widget>[
-                    Text(snapshot.data!.answer),
-                    Image.network(snapshot.data!.image),
+                    Text(snapshot.data!.result),
+                    // Image.network(snapshot.data!.image),
                   ],
                 );
               } else if (snapshot.hasError) {
