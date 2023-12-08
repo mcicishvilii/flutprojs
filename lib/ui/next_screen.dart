@@ -19,6 +19,12 @@ class _NextScreenState extends State<NextScreen> {
     futureYesNo = YesNoService().fetchYesOrNo();
   }
 
+  void refreshData(){
+    setState(() {
+      futureYesNo = YesNoService().fetchYesOrNo();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,6 +55,10 @@ class _NextScreenState extends State<NextScreen> {
             },
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: refreshData,
+          child: const Icon(Icons.refresh),
+        )
       ),
     );
   }
